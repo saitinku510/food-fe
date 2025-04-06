@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Product from "pages/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ColorModeProvider } from "theme/colorModeContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,12 +18,14 @@ const queryClient = new QueryClient({
 const AppRoutes = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/product/:barcode" element={<Product />} />
-        </Routes>
-      </BrowserRouter>
+      <ColorModeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/product/:barcode" element={<Product />} />
+          </Routes>
+        </BrowserRouter>
+      </ColorModeProvider>
     </QueryClientProvider>
   );
 };

@@ -11,13 +11,18 @@ import {
   InputLabel,
   FormControl,
   Checkbox,
-  ListItemText
+  ListItemText,
+  IconButton
 } from "@mui/material";
 import ProductCard from "components/ProductCard";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useDebounce } from "hooks/useDebounce";
 import SkeletonLoader from "components/SkeletonLoader";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Brightness4, Brightness7 } from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
+import { ColorModeContext } from "theme/colorModeContext";
 
 import "styles/home.scss";
 
@@ -30,6 +35,9 @@ const Home = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortOption, setSortOption] = useState("");
   const observerRef = useRef(null);
+
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   const handleCategoryChange = (event) => {
     const {
@@ -110,9 +118,9 @@ const Home = () => {
   }, [fetchNextPage, hasNextPage, products, lastFetchedIndex]);
 
   return (
-    <main>
+    <main className={theme.palette.mode}>
       <header className="header">
-        <a href="/">Food FE</a>
+        <Link to="/">Food FE</Link>
         <Box className="headerTools">
           <TextField
             label="Search Products"
@@ -157,6 +165,9 @@ const Home = () => {
               ))}
             </Select>
           </FormControl>
+          <IconButton onClick={colorMode.toggleColorMode} color="inherit">
+            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
         </Box>
       </header>
       <Box className="products">

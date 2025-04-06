@@ -8,24 +8,31 @@ import {
   Typography,
   Chip,
   Divider,
-  Grid
+  Grid,
+  IconButton
 } from "@mui/material";
+import { useContext } from "react";
+import { Brightness4, Brightness7 } from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
+import { ColorModeContext } from "theme/colorModeContext";
+import { ArrowBack } from "@mui/icons-material";
 
 import "./product.scss";
-import { BackIcon } from "utils/icons";
 
 const Product = () => {
   const { barcode } = useParams();
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   const {
     data: product,
     isLoading,
     isError
   } = useQuery({
-    queryKey: ["product",barcode],
+    queryKey: ["product", barcode],
     queryFn: () => fetchProductSingle(barcode),
     enabled: !!barcode,
-    retry:1
+    retry: 1
   });
 
   if (isLoading) {
@@ -49,13 +56,17 @@ const Product = () => {
   const nutriments = product.nutriments || {};
 
   return (
-    <Box p={4}>
-        <Link
-                to={"/"}
-        className="productsCard"
-      
-              >      <BackIcon />
-</Link>
+    <Box p={4} className={theme.palette.mode}>
+      <Link to={"/"} className="productDetail" style={{ marginBottom: "24px" }}>
+        <ArrowBack />
+      </Link>
+      <IconButton
+        onClick={colorMode.toggleColorMode}
+        color="inherit"
+        style={{ marginBottom: "16px" }}
+      >
+        {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+      </IconButton>
       <Typography variant="h4" gutterBottom>
         {product.product_name}
       </Typography>
