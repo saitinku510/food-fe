@@ -1,0 +1,70 @@
+.header {
+  padding: 32px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  a {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+  }
+  &Tools {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+.products {
+  display: flex;
+  gap: 40px 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 32px 20px;
+  &Card {
+    width: calc((100% - 56px) / 4);
+    flex-grow: 1;
+    align-self: stretch;
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.loader {
+  display: flex !important;
+  gap: 40px 20px !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 32px 20px;
+  width: 100%;
+  .skeleton {
+    flex-basis: 22%;
+    flex-grow: 1;
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 992px) {
+  .productsCard {
+    width: calc((100% - 56px) / 3);
+  }
+}
+@media (max-width: 768px) {
+  .productsCard {
+    width: calc((100% - 56px) / 2);
+  }
+}
+@media (max-width: 480px) {
+  .productsCard {
+    width: calc((100% - 56px) / 1);
+  }
+
+  .headerTools {
+    .MuiFormControl-root {
+      width: 100%;
+    }
+  }
+}
