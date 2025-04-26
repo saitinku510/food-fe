@@ -120,7 +120,7 @@ const Home = () => {
   return (
     <main className={theme.palette.mode}>
       <header className="header">
-        <Link to="/">Food FE</Link>
+        <Link to="/">Nutri Track</Link>
         <Box className="headerTools">
           <TextField
             label="Search Products"
